@@ -10,14 +10,18 @@ package Ns3Objects.Devices;
 import Helpers.LoggingHelper;
 import Ns3Objects.Links.NetworkLink;
 import Ns3Objects.Netoworks.Network;
+import Ns3Objects.UdpEchoCommunication.UdpEchoServer;
 import StatusHelper.LinkType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * A class to store information of a Device in NS-3
  * */
 public class Device {
+
+    private final String id;
     /**
      * to identification of each CSMA devices
      * */
@@ -53,6 +57,7 @@ public class Device {
      * @since 0.3.0
      * */
     public Device(NetworkLink linkSettings, Network networkSettings, ArrayList<Integer> nodes, int csma_index) {
+        this.id = UUID.randomUUID().toString();
         this.linkSettings = linkSettings;
         this.networkSettings = networkSettings;
         this.nodes = new ArrayList<>();
@@ -71,11 +76,38 @@ public class Device {
      * @since 0.3.0
      * */
     public Device(NetworkLink linkSettings, Network networkSettings, String nodeA, String nodeB) {
+        this.id = UUID.randomUUID().toString();
         this.linkSettings = linkSettings;
         this.networkSettings = networkSettings;
         this.nodeA = nodeA;
         this.nodeB = nodeB;
         this.nodesGroup = nodeA+nodeB;
+    }
+
+    /**
+     * To compare two objects of type Device
+     *
+     * @since 2.0.0
+     * @param obj Object to be compared
+     * @return boolean value indicating whether these two objects are same
+     * */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Device that = (Device) obj;
+        return id.equals(that.id);
+    }
+
+    /**
+     * To get the hashcode of this object
+     *
+     * @since 2.0.0
+     * @return integer value of hash code for this object
+     * */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     /**

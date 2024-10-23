@@ -1,6 +1,9 @@
 package Ns3Objects.Links;
 
+import Ns3Objects.UdpEchoCommunication.UdpEchoServer;
 import StatusHelper.LinkType;
+
+import java.util.UUID;
 
 /**
  * to store the link of type PointToPointHelper in terms of NS-3 Script
@@ -10,7 +13,7 @@ public class P2P implements NetworkLink{
     /**
      * for unique identity
      * */
-    private int id;
+    private final String id;
     /**
      * for alias name
      * */
@@ -47,18 +50,17 @@ public class P2P implements NetworkLink{
     /**
      * to instantiate the object of type P2P
      *
-     * @param id for identity
      * @param name for alias
      * @param delay for delay in ms
      * @param dataRate for data rate of the link
      * @param speedModifier for speed modifier
      * @param enablePcap for enabling packet capture of entire link
-     * @see P2P#P2P(int, String, String, String, String, boolean, boolean, boolean)  P2P
-     * @see P2P#P2P(int, String, String, String, String, boolean, boolean)  P2P
+     * @see P2P#P2P(String, String, String, String, boolean, boolean, boolean)  P2P
+     * @see P2P#P2P(String, String, String, String, boolean, boolean)  P2P
      * @since 0.3.0
      * */
-    public P2P(int id,String name,String delay,String dataRate,String speedModifier, boolean enablePcap) {
-        this.id  = id;
+    public P2P(String name,String delay,String dataRate,String speedModifier, boolean enablePcap) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.delay = delay;
         this.dataRate = dataRate;
@@ -73,26 +75,24 @@ public class P2P implements NetworkLink{
     /**
      * to instantiate the object of type P2P
      *
-     * @param id for identity
      * @param name for alias
      * @param delay for delay in ms
      * @param dataRate for data rate of the link
      * @param speedModifier for speed modifier
      * @param enablePcap for enabling packet capture of entire link
      * @param isDefault for setting as default link
-     * @see P2P#P2P(int, String, String, String, String, boolean, boolean, boolean)  P2P
-     * @see P2P#P2P(int, String, String, String, String, boolean)  P2P
+     * @see P2P#P2P(String, String, String, String, boolean, boolean, boolean)  P2P
+     * @see P2P#P2P(String, String, String, String, boolean)  P2P
      * @since 0.3.0
      * */
-    public P2P(int id,String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault) {
-        this(id,name,delay,dataRate,speedModifier,enablePcap);
+    public P2P(String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault) {
+        this(name,delay,dataRate,speedModifier,enablePcap);
         this.isDefault = isDefault;
     }
 
     /**
      * to instantiate the object of type P2P
      *
-     * @param id for identity
      * @param name for alias
      * @param delay for delay in ms
      * @param dataRate for data rate of the link
@@ -100,13 +100,39 @@ public class P2P implements NetworkLink{
      * @param enablePcap for enabling packet capture of entire link
      * @param isDefault for setting as default link
      * @param isUsed for marking as used link
-     * @see P2P#P2P(int, String, String, String, String, boolean, boolean)  P2P
-     * @see P2P#P2P(int, String, String, String, String, boolean)  P2P
+     * @see P2P#P2P(String, String, String, String, boolean, boolean)  P2P
+     * @see P2P#P2P(String, String, String, String, boolean)  P2P
      * @since 0.3.0
      * */
-    public P2P(int id,String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault, boolean isUsed) {
-        this(id,name,delay,dataRate,speedModifier,enablePcap,isDefault);
+    public P2P(String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault, boolean isUsed) {
+        this(name,delay,dataRate,speedModifier,enablePcap,isDefault);
         this.isUsed = isUsed;
+    }
+
+    /**
+     * To compare two objects of type P2P
+     *
+     * @since 2.0.0
+     * @param obj Object to be compared
+     * @return boolean value indicating whether these two objects are same
+     * */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        P2P that = (P2P) obj;
+        return id.equals(that.id);
+    }
+
+    /**
+     * To get the hashcode of this object
+     *
+     * @since 2.0.0
+     * @return integer value of hash code for this object
+     * */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     /**
@@ -205,13 +231,8 @@ public class P2P implements NetworkLink{
 
 
     @Override
-    public int getId() {
+    public String getId() {
         return this.id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

@@ -1,6 +1,9 @@
 package Ns3Objects.Links;
 
+import Ns3Objects.UdpEchoCommunication.UdpEchoServer;
 import StatusHelper.LinkType;
+
+import java.util.UUID;
 
 /**
  * to store the link of type CsmaHelper in terms of NS-3 Script
@@ -10,7 +13,7 @@ public class CSMA implements NetworkLink{
     /**
      * for unique identity
      * */
-    private int id;
+    private final String id;
     /**
      * for alias name
      * */
@@ -47,7 +50,6 @@ public class CSMA implements NetworkLink{
     /**
      * to instantiate the object of type CSMA
      *
-     * @param id for identity
      * @param name alias name
      * @param delay delay value in ms
      * @param dataRate for data rate
@@ -57,8 +59,8 @@ public class CSMA implements NetworkLink{
      * @see NetworkLink
      * @since 1.1.0
      * */
-    public CSMA(int id,String name,String delay,String dataRate,String speedModifier, boolean enablePcap) {
-        this.id  = id;
+    public CSMA(String name,String delay,String dataRate,String speedModifier, boolean enablePcap) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.delay = delay;
         this.dataRate = dataRate;
@@ -73,26 +75,24 @@ public class CSMA implements NetworkLink{
     /**
      * to instantiate the object of type CSMA
      *
-     * @param id for identity
      * @param name for alias
      * @param delay for delay in ms
      * @param dataRate for data rate of the link
      * @param speedModifier for speed modifier
      * @param enablePcap for enabling packet capture of entire link
      * @param isDefault for setting as default link
-     * @see CSMA#CSMA(int, String, String, String, String, boolean)
-     * @see CSMA#CSMA(int, String, String, String, String, boolean, boolean, boolean)
+     * @see CSMA#CSMA(String, String, String, String, boolean)
+     * @see CSMA#CSMA(String, String, String, String, boolean, boolean, boolean)
      * @since 1.1.0
      * */
-    public CSMA(int id,String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault) {
-        this(id,name,delay,dataRate,speedModifier,enablePcap);
+    public CSMA(String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault) {
+        this(name,delay,dataRate,speedModifier,enablePcap);
         this.isDefault = isDefault;
     }
 
     /**
      * to instantiate the object of type CSMA
      *
-     * @param id for identity
      * @param name for alias
      * @param delay for delay in ms
      * @param dataRate for data rate of the link
@@ -100,13 +100,39 @@ public class CSMA implements NetworkLink{
      * @param enablePcap for enabling packet capture of entire link
      * @param isDefault for setting as default link
      * @param isUsed for marking as used link
-     * @see CSMA#CSMA(int, String, String, String, String, boolean)
-     * @see CSMA#CSMA(int, String, String, String, String, boolean, boolean)  CSMA
+     * @see CSMA#CSMA(String, String, String, String, boolean)
+     * @see CSMA#CSMA(String, String, String, String, boolean, boolean)  CSMA
      * @since 1.1.0
      * */
-    public CSMA(int id,String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault, boolean isUsed) {
-        this(id,name,delay,dataRate,speedModifier,enablePcap,isDefault);
+    public CSMA(String name,String delay,String dataRate,String speedModifier, boolean enablePcap, boolean isDefault, boolean isUsed) {
+        this(name,delay,dataRate,speedModifier,enablePcap,isDefault);
         this.isUsed = isUsed;
+    }
+
+    /**
+     * To compare two objects of type CSMA
+     *
+     * @since 2.0.0
+     * @param obj Object to be compared
+     * @return boolean value indicating whether these two objects are same
+     * */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        CSMA that = (CSMA) obj;
+        return id.equals(that.id);
+    }
+
+    /**
+     * To get the hashcode of this object
+     *
+     * @since 2.0.0
+     * @return integer value of hash code for this object
+     * */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     /**
@@ -204,13 +230,8 @@ public class CSMA implements NetworkLink{
     }
 
     @Override
-    public int getId() {
+    public String getId() {
         return this.id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

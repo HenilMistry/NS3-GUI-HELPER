@@ -1,6 +1,9 @@
 package Ns3Objects.Links;
 
+import Ns3Objects.UdpEchoCommunication.UdpEchoServer;
 import StatusHelper.LinkType;
+
+import java.util.UUID;
 
 /**
  * to store the link of type YansWifiHelper in terms of NS-3 Script
@@ -10,7 +13,7 @@ public class WIFI implements NetworkLink  {
     /**
      * for unique identity
      * */
-    public int id;
+    private final String id;
     /**
      * for alias name
      * */
@@ -62,7 +65,6 @@ public class WIFI implements NetworkLink  {
     /**
      * to create an object of type Wi-Fi
      *
-     * @param id the unique identity number
      * @param name The alias name for the channel
      * @param standard the wi-fi standard
      * @param remoteStationManager the remote station manager
@@ -70,12 +72,12 @@ public class WIFI implements NetworkLink  {
      * @param enablePcap for enabling the packet capture of entire link
      * @param isDefault for marking as default link
      * @param isUsed for marking as used link
-     * @see WIFI#WIFI(int, String, String, String, String, boolean, boolean)
-     * @see WIFI#WIFI(int, String, String, String, String, boolean)
+     * @see WIFI#WIFI(String, String, String, String, boolean, boolean)
+     * @see WIFI#WIFI(String, String, String, String, boolean)
      * @since 1.2.0
      * */
-    public WIFI(int id, String name, String standard, String remoteStationManager, String ssid, boolean enablePcap, boolean isDefault, boolean isUsed) {
-        this.id = id;
+    public WIFI(String name, String standard, String remoteStationManager, String ssid, boolean enablePcap, boolean isDefault, boolean isUsed) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.enablePcap = enablePcap;
         this.isDefault = isDefault;
@@ -88,47 +90,66 @@ public class WIFI implements NetworkLink  {
     
     /**
      * to create an object of type Wi-Fi
-     * 
-     * @param id the unique identity number
+     *
      * @param name The alias name for the channel
      * @param standard the wi-fi standard
      * @param remoteStationManager the remote station manager
      * @param ssid the ssid for this channel
      * @param enablePcap for enabling the packet capture of entire link
      * @param isDefault for marking as default link
-     * @see WIFI#WIFI(int, String, String, String, String, boolean, boolean, boolean)
-     * @see WIFI#WIFI(int, String, String, String, String, boolean) 
+     * @see WIFI#WIFI(String, String, String, String, boolean, boolean, boolean)
+     * @see WIFI#WIFI(String, String, String, String, boolean)
      * @since 1.2.0
      * */
-    public WIFI(int id, String name, String standard, String remoteStationManager, String ssid, boolean enablePcap, boolean isDefault) {
-        this(id,name,standard,remoteStationManager,ssid,enablePcap,isDefault,false);
+    public WIFI(String name, String standard, String remoteStationManager, String ssid, boolean enablePcap, boolean isDefault) {
+        this(name,standard,remoteStationManager,ssid,enablePcap,isDefault,false);
     }
 
     /**
      * to create an object of type Wi-Fi
      *
-     * @param id the unique identity number
      * @param name The alias name for the channel
      * @param standard the wi-fi standard
      * @param remoteStationManager the remote station manager
      * @param ssid the ssid for this channel
      * @param enablePcap for enabling the packet capture of entire link
-     * @see WIFI#WIFI(int, String, String, String, String, boolean, boolean, boolean)
-     * @see WIFI#WIFI(int, String, String, String, String, boolean, boolean) 
+     * @see WIFI#WIFI(String, String, String, String, boolean, boolean, boolean)
+     * @see WIFI#WIFI(String, String, String, String, boolean, boolean)
      * @since 1.2.0
      * */
-    public WIFI(int id, String name, String standard, String remoteStationManager, String ssid, boolean enablePcap) {
-        this(id,name,standard,remoteStationManager,ssid,enablePcap,false,false);
+    public WIFI(String name, String standard, String remoteStationManager, String ssid, boolean enablePcap) {
+        this(name,standard,remoteStationManager,ssid,enablePcap,false,false);
+    }
+
+    /**
+     * To compare two objects of type WIFI
+     *
+     * @since 2.0.0
+     * @param obj Object to be compared
+     * @return boolean value indicating whether these two objects are same
+     * */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        WIFI that = (WIFI) obj;
+        return id.equals(that.id);
+    }
+
+    /**
+     * To get the hashcode of this object
+     *
+     * @since 2.0.0
+     * @return integer value of hash code for this object
+     * */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     @Override
-    public int getId() {
+    public String getId() {
         return this.id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

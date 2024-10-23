@@ -34,9 +34,7 @@ public interface NetworkLink {
      * */
     String LABEL_CSMA = "CSMA";
 
-    public int getId();
-
-    public void setId(int id);
+    public String getId();
 
     public String getName();
 

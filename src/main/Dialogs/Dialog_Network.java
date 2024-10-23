@@ -178,7 +178,7 @@ public class Dialog_Network extends JFrame implements Dialog {
      * */
     private void addNetwork() {
         LoggingHelper.LogFunction("Dialog Network : adding a network settings!");
-        Network network = new Network(lastID++, this.textField_netid.getText().toString(), this.textField_netmask.getText().toString(), this.textField_network_name.getText().toString());
+        Network network = new Network(this.textField_netid.getText().toString(), this.textField_netmask.getText().toString(), this.textField_network_name.getText().toString());
         this.links.add(network);
         ((JComboBox)this.helpfulComponents.get(COMPONENT_COMBO_BOX)).addItem(this.links.get(this.links.size()-1));
         this.dialogHelper.showInformationMsg("Network Added Successfully with name : "+this.textField_network_name.getText().toString(),"Success");

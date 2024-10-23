@@ -224,9 +224,9 @@ public class Dialog_Link extends JFrame implements Dialog {
         LoggingHelper.LogFunction("Dialog Link : adding a link!");
         NetworkLink link;
         if (NetworkLink.getLinkType(comboBox_linkType.getSelectedIndex())== LinkType.LINK_CSMA) {
-            link = new CSMA(this.links.size(), this.textField_name.getText().toString(), this.textField_delay.getText().toString(), this.textField_speed.getText().toString(), this.comboBox_speedModifier.getSelectedItem().toString(), chkBox_enablePcap.isSelected());
+            link = new CSMA(this.textField_name.getText().toString(), this.textField_delay.getText().toString(), this.textField_speed.getText().toString(), this.comboBox_speedModifier.getSelectedItem().toString(), chkBox_enablePcap.isSelected());
         } else { // default case or P2P Link...
-            link = new P2P(this.links.size(), this.textField_name.getText().toString(), this.textField_delay.getText().toString(), this.textField_speed.getText().toString(), this.comboBox_speedModifier.getSelectedItem().toString(), chkBox_enablePcap.isSelected());
+            link = new P2P(this.textField_name.getText().toString(), this.textField_delay.getText().toString(), this.textField_speed.getText().toString(),  this.comboBox_speedModifier.getSelectedItem().toString(), chkBox_enablePcap.isSelected());
         }
         this.links.add(link);
         ((JComboBox)this.helpfulComponents.get(COMPONENT_COMBO_BOX)).addItem(this.links.get(this.links.size()-1));

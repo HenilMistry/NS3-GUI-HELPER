@@ -229,9 +229,9 @@ public class Dialog_DefaultLinkConfig extends JFrame implements Dialog {
                 } else {
                     // logic to see what's the type of channel has been selected...
                     if (LinkType.LINK_CSMA == NetworkLink.getLinkType(comboBox_linkType.getSelectedIndex())) {
-                        defaultLinks.add(new CSMA(defaultLinks.size(), textField_alias.getText(), textField_delay.getText(), textField_dataRate.getText(), comboBox_datarateModifier.getSelectedItem().toString(), checkBox_enablePcap.isSelected(), true));
+                        defaultLinks.add(new CSMA(textField_alias.getText(), textField_delay.getText(), textField_dataRate.getText(), comboBox_datarateModifier.getSelectedItem().toString(), checkBox_enablePcap.isSelected(), true));
                     } else {
-                        defaultLinks.add(new P2P(defaultLinks.size(), textField_alias.getText(), textField_delay.getText(), textField_dataRate.getText(), comboBox_datarateModifier.getSelectedItem().toString(), checkBox_enablePcap.isSelected(), true));
+                        defaultLinks.add(new P2P(textField_alias.getText(), textField_delay.getText(), textField_dataRate.getText(), comboBox_datarateModifier.getSelectedItem().toString(), checkBox_enablePcap.isSelected(), true));
                     }
                     dialogHelper.showInformationMsg("Link has been added successfully!", "Success!");
                 }

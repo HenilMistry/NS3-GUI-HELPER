@@ -213,7 +213,7 @@ public class Dialog_DefaultWiFiLinkConfig extends JFrame implements Dialog {
                     dialogHelper.showInformationMsg("Link has been updated successfully!", "Success!");
                 } else {
                     // logic to see what's the type of channel has been selected...
-                    defaultLinks.add(new WIFI(defaultLinks.size(),textField_alias.getText(), (String) comboBox_wifiStandard.getSelectedItem(), (String) comboBox_stationManager.getSelectedItem(),textField_ssid.getText(), chkBox_enablePcap.isSelected(), true));
+                    defaultLinks.add(new WIFI(textField_alias.getText(), (String) comboBox_wifiStandard.getSelectedItem(), (String) comboBox_stationManager.getSelectedItem(),textField_ssid.getText(), chkBox_enablePcap.isSelected(), true));
                     dialogHelper.showInformationMsg("Link has been added successfully!", "Success!");
                 }
                 showLinksAgain();

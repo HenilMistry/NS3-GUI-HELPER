@@ -152,9 +152,9 @@ public class ApplicationSettingsHelper {
                     LoggingHelper.LogDebug("Str : "+str);
                 }
                 if (params[params.length-1].equalsIgnoreCase(NetworkLink.LABEL_CSMA)) {
-                    links.add(new CSMA(links.size(), params[0], params[1], params[2], params[3], ((params[4].equalsIgnoreCase("Y"))?(true):(false)), true));
+                    links.add(new CSMA(params[0], params[1], params[2], params[3], ((params[4].equalsIgnoreCase("Y"))?(true):(false)), true));
                 } else { // default or p2p case...
-                    links.add(new P2P(links.size(), params[0], params[1], params[2], params[3], ((params[4].equalsIgnoreCase("Y"))?(true):(false)), true));
+                    links.add(new P2P(params[0], params[1], params[2], params[3], ((params[4].equalsIgnoreCase("Y"))?(true):(false)), true));
                 }
             }
             LoggingHelper.LogDebug("Yes! Universal Settings has Default Links!");
@@ -181,7 +181,7 @@ public class ApplicationSettingsHelper {
                 for (String str : params) {
                     LoggingHelper.LogDebug("Str : "+str);
                 }
-                links.add(new WIFI(links.size(),params[1],params[2],params[3],params[4],((params[5].equalsIgnoreCase("Y"))?(true):(false)), true));
+                links.add(new WIFI(params[1],params[2],params[3],params[4],((params[5].equalsIgnoreCase("Y"))?(true):(false)), true));
             }
             LoggingHelper.LogDebug("Yes! Universal Settings has Default Wi-Fi Links!");
         } else {
@@ -207,7 +207,7 @@ public class ApplicationSettingsHelper {
                 for (String str : params) {
                     LoggingHelper.LogDebug("Str : "+str);
                 }
-                networks.add(new Network(0, params[0], params[1], params[2], true));
+                networks.add(new Network(params[0], params[1], params[2], true));
             }
             LoggingHelper.LogDebug("Yes! Universal Settings has Default Networks!");
         } else {

@@ -251,7 +251,7 @@ public class Dialog_DefaultNetworkConfig extends JFrame implements Dialog {
                     editIndex = -1;
                     dialogHelper.showInformationMsg("N/W has been updated successfully!", "Success!");
                 } else {
-                    defaultNetworks.add(new Network(defaultNetworks.size(), textField_netid.getText(), textField_netmask.getText(), textField_alias.getText(), true));
+                    defaultNetworks.add(new Network(textField_netid.getText(), textField_netmask.getText(), textField_alias.getText(), true));
                     dialogHelper.showInformationMsg("N/W has been added successfully!", "Success!");
                 }
                 showNetworksAgain();

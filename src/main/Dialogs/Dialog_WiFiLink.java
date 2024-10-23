@@ -199,7 +199,7 @@ public class Dialog_WiFiLink extends JFrame implements Dialog {
      * */
     private void addLink() {
         LoggingHelper.LogFunction("Dialog WiFiLink : adding a wi-fi link!");
-        NetworkLink link = new WIFI(this.links.size(), this.textField_alias.getText(),(String) this.comboBox_standard.getSelectedItem(), (String) this.comboBox_stationManager.getSelectedItem(), this.textField_ssid.getText(), this.checkBox_enablePcap.isSelected());
+        NetworkLink link = new WIFI(this.textField_alias.getText(),(String) this.comboBox_standard.getSelectedItem(), (String) this.comboBox_stationManager.getSelectedItem(), this.textField_ssid.getText(), this.checkBox_enablePcap.isSelected());
         this.links.add(link);
         ((JComboBox)this.helpfulComponents.get(COMPONENT_COMBO_BOX)).addItem(this.links.get(this.links.size()-1));
         this.dialogHelper.showInformationMsg("Link Added Successfully with name : "+this.textField_alias.getText().toString(),"Success");

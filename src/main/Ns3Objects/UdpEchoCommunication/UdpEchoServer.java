@@ -1,20 +1,18 @@
 package Ns3Objects.UdpEchoCommunication;
 
+import java.util.UUID;
+
 /**
  * To store and manage the UdpEchoServerHelper Objects in NS3...
  *
- * @since 1.3.0
+ * @since 2.0.0
  * */
 public class UdpEchoServer implements Communication {
 
     /**
-     * For maintaining the identity of the objects...
-     * */
-    private static int ID_COUNT = 0;
-    /**
      * ID (identity) of this object
      * */
-    private int ID = -1;
+    private final String id;
     /**
      * The index of the node
      * */
@@ -35,31 +33,56 @@ public class UdpEchoServer implements Communication {
     /**
      * Constructor to create the object of type UdpEchoServer...
      *
-     * @since 1.3.0
+     * @since 2.0.0
      * */
     public UdpEchoServer(int index, int portNo, int startTime, int upTime) {
         this.index = index;
         this.portNo = portNo;
         this.startTime = startTime;
         this.upTime = upTime;
-        this.ID = ID_COUNT;
-        ID_COUNT++;
+        this.id = UUID.randomUUID().toString();
     }
 
     /**
      * To get the ID no. of this object...
      *
-     * @since 1.3.0
+     * @since 2.0.0
      * @return ID no. of this object!
      * */
-    public int getID() {
-        return this.ID;
+    public String getID() {
+        return this.id;
+    }
+
+    /**
+     * To compare two objects of type UdpEchoServer
+     *
+     * @since 2.0.0
+     * @param obj Object to be compared
+     * @return boolean value indicating whether these two objects are same
+     * */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        UdpEchoServer that = (UdpEchoServer) obj;
+        return id.equals(that.id);
+    }
+
+    /**
+     * To get the hashcode of this object
+     *
+     * @since 2.0.0
+     * @return integer value of hash code for this object
+     * */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     /**
      * To get the node index...
      *
-     * @since 1.3.0
+     * @since 2.0.0
      * @return Integer value of the node index
      * */
     @Override
@@ -71,7 +94,7 @@ public class UdpEchoServer implements Communication {
      * To set the node index...
      *
      * @param index The node index
-     * @since 1.3.0
+     * @since 2.0.0
      * */
     @Override
     public void setIndex(int index) {
@@ -81,7 +104,7 @@ public class UdpEchoServer implements Communication {
     /**
      * To get the port no...
      *
-     * @since 1.3.0
+     * @since 2.0.0
      * @return Integer value of the port no.
      * */
     @Override
@@ -93,7 +116,7 @@ public class UdpEchoServer implements Communication {
      * To set the port no...
      *
      * @param portNo The port number
-     * @since 1.3.0
+     * @since 2.0.0
      * */
     @Override
     public void setPortNo(int portNo) {
@@ -103,7 +126,7 @@ public class UdpEchoServer implements Communication {
     /**
      * To get the start time...
      *
-     * @since 1.3.0
+     * @since 2.0.0
      * @return Integer value of the start time
      * */
     @Override
@@ -115,7 +138,7 @@ public class UdpEchoServer implements Communication {
      * To set the start time...
      *
      * @param startTime The start time
-     * @since 1.3.0
+     * @since 2.0.0
      * */
     @Override
     public void setStartTime(int startTime) {
@@ -125,7 +148,7 @@ public class UdpEchoServer implements Communication {
     /**
      * To get the uptime...
      *
-     * @since 1.3.0
+     * @since 2.0.0
      * @return Integer value of the uptime
      * */
     @Override
@@ -137,7 +160,7 @@ public class UdpEchoServer implements Communication {
      * To set the uptime...
      *
      * @param upTime The uptime
-     * @since 1.3.0
+     * @since 2.0.0
      * */
     @Override
     public void setUpTime(int upTime) {
@@ -148,7 +171,7 @@ public class UdpEchoServer implements Communication {
      * To get the string format for directly printing...
      *
      * @return String format information for the Server Configuration...
-     * @since 1.3.0
+     * @since 2.0.0
      * */
     @Override
     public String toString() {

@@ -3,7 +3,7 @@ package Ns3Objects.UdpEchoCommunication;
 /**
  * To store and manage the Udp Echo Communication objects in NS3
  *
- * @since 1.3.0
+ * @since 2.0.0
  * */
 public interface Communication {
 
